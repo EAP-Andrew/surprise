@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hungry? Let's Figure It Out 🍴</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Epilogue:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --bg: #0d0d0d;
+  --surface: #161616;
+  --border: #2a2a2a;
+  --text: #f0ece4;
+  --muted: #666;
+  --accent: #ff5c35;
+  --accent2: #ffb800;
+  --accent3: #4ef0b0;
+  --pill: #1e1e1e;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Epilogue', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-x: hidden;
+}
+
+/* Ambient blobs */
+body::before, body::after {
+  content: '';
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: 0;
+}
+body::before {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, #ff5c3520 0%, transparent 70%);
+  top: -100px; left: -100px;
+  animation: drift1 10s ease-in-out infinite alternate;
+}
+body::after {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, #ffb80018 0%, transparent 70%);
+  bottom: -80px; right: -80px;
+  animation: drift2 12s ease-in-out infinite alternate;
+}
+
+@keyframes drift1 { to { transform: translate(60px, 80px); } }
+@keyframes drift2 { to { transform: translate(-60px, -60px); } }
+
+.wrap {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 520px;
+}
+
+/* HEADER */
+.header {
+  margin-bottom: 36px;
+  animation: fadeUp .6s cubic-bezier(.2,.8,.2,1) both;
+}
+
+.header .tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--pill);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  padding: 5px 14px 5px 10px;
+  font-size: .72rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+.header .tag span { color: var(--accent); font-size: 1rem; }
+
+.header h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2.2rem, 7vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -.02em;
+}
+
+.header h1 .hi { color: var(--text); }
+.header h1 .hungry {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--accent);
+}
+.header h1 .help { color: var(--accent2); }
+
+.header p {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: .9rem;
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+/* PROGRESS */
+.progress-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+  animation: fadeUp .6s .1s cubic-bezier(.2,.8,.2,1) both;
+}
+.progress-track {
+  flex: 1;
+  height: 3px;
+  background: var(--border);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  border-radius: 99px;
+  transition: width .5s cubic-bezier(.4,0,.2,1);
+}
+.progress-label {
+  font-size: .75rem;
+  color: var(--muted);
+  white-space: nowrap;
+  font-weight: 300;
+}
+
+/* CARD */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 32px 28px;
+  animation: cardIn .45s cubic-bezier(.2,.8,.2,1) both;
+}
+
+@keyframes cardIn {
+  from { opacity:0; transform: translateY(20px) scale(.98); }
+  to   { opacity:1; transform: translateY(0) scale(1); }
+}
+
+.q-number {
+  font-size: .7rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.q-text {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.3rem, 4.5vw, 1.75rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 28px;
+  color: var(--text);
+}
+
+.options {
+  display: grid;
+  gap: 10px;
+}
+.options.col2 { grid-template-columns: 1fr 1fr; }
+
+.opt {
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  padding: 16px 14px;
+  cursor: pointer;
+  text-align: left;
+  font-family: 'Epilogue', sans-serif;
+  color: var(--text);
+  transition: border-color .18s, background .18s, transform .15s;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.opt .icon {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.opt .label {
+  font-size: .88rem;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+.opt:hover {
+  border-color: #444;
+  background: #1a1a1a;
+  transform: translateY(-2px);
+}
+
+.opt.selected {
+  border-color: var(--accent);
+  background: #1f1008;
+}
+
+.opt.selected .label { color: var(--accent2); }
+
+/* NAV */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24px;
+  animation: fadeUp .5s .15s cubic-bezier(.2,.8,.2,1) both;
+}
+
+.btn-back {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-family: 'Epilogue', sans-serif;
+  font-size: .88rem;
+  cursor: pointer;
+  transition: color .2s;
+  padding: 8px 0;
+}
+.btn-back:hover { color: var(--text); }
+.btn-back:disabled { opacity:.25; cursor:default; }
+
+.btn-next {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 13px 30px;
+  font-family: 'Syne', sans-serif;
+  font-size: .9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .18s, transform .15s, box-shadow .2s;
+  box-shadow: 0 0 0 0 #ff5c3500;
+  letter-spacing: .02em;
+}
+.btn-next:hover:not(:disabled) {
+  background: #ff3a10;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px #ff5c3540;
+}
+.btn-next:disabled {
+  background: #2a2a2a;
+  color: #444;
+  cursor: default;
+}
+
+/* RESULT */
+.result-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 36px 28px;
+  text-align: center;
+  animation: popIn .5s cubic-bezier(.34,1.56,.64,1) both;
+}
+
+@keyframes popIn {
+  from { opacity:0; transform: scale(.88); }
+  to   { opacity:1; transform: scale(1); }
+}
+
+.result-card .big { font-size: 80px; line-height: 1; margin-bottom: 20px; display: block; }
+
+.result-card h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.6rem, 5vw, 2.2rem);
+  font-weight: 800;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+
+.result-card .sub {
+  color: var(--accent2);
+  font-size: .85rem;
+  font-weight: 300;
+  letter-spacing: .05em;
+  margin-bottom: 28px;
+  text-transform: uppercase;
+}
+
+.ideas {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px 20px;
+  text-align: left;
+  margin-bottom: 28px;
+}
+
+.ideas-title {
+  font-size: .68rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent3);
+  margin-bottom: 14px;
+  font-weight: 500;
+}
+
+.idea-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: .9rem;
+  color: var(--text);
+  font-weight: 300;
+}
+.idea-item:last-child { border-bottom: none; padding-bottom: 0; }
+.idea-item .dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+.btn-restart {
+  background: var(--pill);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  border-radius: 12px;
+  padding: 12px 28px;
+  font-family: 'Epilogue', sans-serif;
+  font-size: .88rem;
+  cursor: pointer;
+  transition: all .2s;
+}
+.btn-restart:hover {
+  border-color: #555;
+  color: var(--text);
+  transform: translateY(-1px);
+}
+
+@keyframes fadeUp {
+  from { opacity:0; transform: translateY(14px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="header">
+    <div class="tag"><span>🍴</span> Annie's personnal food mood finder</div>
+    <h1>
+      <span class="hi">Hey </span><span class="name">Annie,</span><br>
+      <span class="hungry">hungry?</span><br>
+      <span class="help">let's help.</span>
+    </h1>
+    <p>Answer quick questions — Don'y worry, we will figure out what you want to eat.</p>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-track"><div class="progress-fill" id="pFill" style="width:0%"></div></div>
+    <div class="progress-label" id="pLabel">1 / 7</div>
+  </div>
+
+  <div id="mainArea"></div>
+
+  <div class="nav" id="navArea">
+    <button class="btn-back" id="btnBack" onclick="prev()" disabled>← Back</button>
+    <button class="btn-next" id="btnNext" onclick="next()" disabled>Next →</button>
+  </div>
+
+</div>
+
+<script>
+const Qs = [
+  {
+    q: "How hungry are you right now?",
+    col2: true,
+    opts: [
+      { icon:"🍃", label:"Tiny craving" },
+      { icon:"😐", label:"Moderately hungry" },
+      { icon:"😤", label:"Pretty hungry" },
+      { icon:"🦁", label:"Absolutely starving" },
+    ]
+  },
+  {
+    q: "Sweet or savoury?",
+    col2: true,
+    opts: [
+      { icon:"🍬", label:"Sweet" },
+      { icon:"🧂", label:"Savoury" },
+      { icon:"🤷", label:"Both! Why choose?" },
+      { icon:"😶", label:"No real preference" },
+    ]
+  },
+  {
+    q: "Warm & comforting or fresh & cold?",
+    col2: true,
+    opts: [
+      { icon:"♨️", label:"Warm & cozy" },
+      { icon:"❄️", label:"Cold & refreshing" },
+      { icon:"🌤️", label:"Either is fine" },
+    ]
+  },
+  {
+    q: "What's your current mood?",
+    col2: true,
+    opts: [
+      { icon:"🛋️", label:"Tired, I need comfort" },
+      { icon:"🎉", label:"Happy & celebration" },
+      { icon:"😮‍💨", label:"Stressed, I need calm" },
+      { icon:"😌", label:"Just chilling" },
+    ]
+  },
+  {
+    q: "What texture sounds good?",
+    col2: true,
+    opts: [
+      { icon:"🧈", label:"Soft & creamy" },
+      { icon:"🥨", label:"Crunchy & crispy" },
+      { icon:"🥖", label:"Chewy & hearty" },
+      { icon:"🥗", label:"Light & fresh" },
+    ]
+  },
+  {
+    q: "How much cooking effort are you up for?",
+    col2: true,
+    opts: [
+      { icon:"📱", label:"Zero, I just want to order it" },
+      { icon:"🔥", label:"Heat something up" },
+      { icon:"🍳", label:"Quick cook is fine" },
+      { icon:"👨‍🍳", label:"I want to actually cook" },
+    ]
+  },
+  {
+    q: "Any cuisine calling your name?",
+    col2: true,
+    opts: [
+      { icon:"🍝", label:"Italian vibes" },
+      { icon:"🥢", label:"Asian flavours" },
+      { icon:"🥘", label:"Classic comfort food" },
+      { icon:"🤷", label:"No preference" },
+    ]
+  }
+];
+
+const Results = {
+  get: (a) => {
+    const hungry  = a[0]; // 0-3
+    const taste   = a[1]; // 0=sweet,1=savoury,2=both,3=none
+    const temp    = a[2]; // 0=warm,1=cold,2=either
+    const mood    = a[3]; // 0=tired,1=happy,2=stressed,3=chill
+    const texture = a[4]; // 0=soft,1=crunchy,2=chewy,3=light
+    const effort  = a[5]; // 0-3
+    const cuisine = a[6]; // 0=italian,1=asian,2=comfort,3=
+
+    // Sweet path
+    if (taste === 0) {
+      if (hungry <= 1) return {
+        emoji:"🥞", title:"Light Sweet Treat",
+        sub:"Small • Comforting • Sweet",
+        ideas:["Crêpes with Nutella & banana","French toast with fruit","Warm cinnamon roll","Yogurt with honey & granola"]
+      };
+      if (temp === 1) return {
+        emoji:"🍦", title:"Cold & Sweet",
+        sub:"Refreshing • Indulgent",
+        ideas:["Smoothie bowl","Ice cream sundae","Açaí bowl with toppings","Frozen yogurt with fruit"]
+      };
+      return {
+        emoji:"🧇", title:"Filling Sweet Meal",
+        sub:"Substantial • Warm • Sweet",
+        ideas:["Waffles with whipped cream & berries","Banana pancakes","French toast tower","Pain perdu with caramel"]
+      };
+    }
+
+    // Savoury path
+    if (taste === 1) {
+      if (cuisine === 1) return temp === 0 ? {
+        emoji:"🍜", title:"Asian Warm Bowl",
+        sub:"Umami • Cozy • Satisfying",
+        ideas:["Ramen with soft-boiled egg","Fried rice with veggies","Gyoza + miso soup","Udon noodles"]
+      } : {
+        emoji:"🥗", title:"Fresh Asian Plate",
+        sub:"Light • Bright • Flavourful",
+        ideas:["Poke bowl","Vietnamese summer rolls","Cold soba salad","Edamame & sushi platter"]
+      };
+      if (cuisine === 3) return {
+        emoji:"🌮", title:"Mexican Feast",
+        sub:"Spicy • Bold • Satisfying",
+        ideas:["Tacos (chicken or beef)","Burrito bowl with guac","Nachos loaded up","Quesadilla with salsa"]
+      };
+      if (cuisine === 0) return hungry >= 2 ? {
+        emoji:"🍝", title:"Hearty Italian",
+        sub:"Rich • Comforting • Filling",
+        ideas:["Spaghetti carbonara","Penne arrabbiata","Pizza Margherita","Gnocchi al pomodoro"]
+      } : {
+        emoji:"🍕", title:"Light Italian Bites",
+        sub:"Easy • Delicious",
+        ideas:["Bruschetta","Small pasta portion","Caprese salad","Pizza toast"]
+      };
+      // comfort
+      if (hungry <= 1) return {
+        emoji:"🧀", title:"Classic Comfort Snack",
+        sub:"Cozy • Small • Satisfying",
+        ideas:["Grilled cheese sandwich","Soup & crusty bread","Scrambled eggs on toast","Mac & cheese (small)"]
+      };
+      return {
+        emoji:"🥘", title:"Big Comfort Meal",
+        sub:"Hearty • Warming • Filling",
+        ideas:["Shepherd's pie","Roast chicken & veg","Beef stew","Loaded baked potato"]
+      };
+    }
+
+    // Both / no preference
+    if (hungry <= 1) return {
+      emoji:"🍱", title:"Mixed Snack Board",
+      sub:"Light • Varied • Easy",
+      ideas:["Cheese & fruit board","Crackers with hummus & jam","Charcuterie plate","Yogurt parfait"]
+    };
+    if (temp === 0) return {
+      emoji:"🍲", title:"Warm Balanced Meal",
+      sub:"Hearty • Satisfying",
+      ideas:["Tomato soup + grilled cheese","Stir-fry with rice","Quiche & green salad","Buddha bowl (warm)"]
+    };
+    return {
+      emoji:"🥗", title:"Fresh & Balanced",
+      sub:"Light • Clean • Energising",
+      ideas:["Big grain salad","Poke bowl","Mezze platter","Cold noodle bowl"]
+    };
+  }
+};
+
+let cur = 0;
+let ans = new Array(Qs.length).fill(null);
+
+function render() {
+  const q = Qs[cur];
+  document.getElementById('mainArea').innerHTML = `
+    <div class="card">
+      <div class="q-number">Question ${cur+1} of ${Qs.length}</div>
+      <div class="q-text">${q.q}</div>
+      <div class="options ${q.col2 ? 'col2' : ''}">
+        ${q.opts.map((o,i)=>`
+          <button class="opt ${ans[cur]===i?'selected':''}" onclick="pick(${i})">
+            <span class="icon">${o.icon}</span>
+            <span class="label">${o.label}</span>
+          </button>
+        `).join('')}
+      </div>
+    </div>
+  `;
+
+  const pct = (cur / Qs.length) * 100;
+  document.getElementById('pFill').style.width = pct + '%';
+  document.getElementById('pLabel').textContent = `${cur+1} / ${Qs.length}`;
+  document.getElementById('btnBack').disabled = cur === 0;
+  document.getElementById('btnNext').disabled = ans[cur] === null;
+  document.getElementById('btnNext').textContent = cur === Qs.length - 1 ? '✨ Show me my meal' : 'Next →';
+}
+
+function pick(i) {
+  ans[cur] = i;
+  render();
+}
+
+function next() {
+  if (ans[cur] === null) return;
+  if (cur === Qs.length - 1) { showResult(); return; }
+  cur++;
+  render();
+}
+
+function prev() {
+  if (cur === 0) return;
+  cur--;
+  render();
+}
+
+function showResult() {
+  const r = Results.get(ans);
+  document.getElementById('pFill').style.width = '100%';
+  document.getElementById('pLabel').textContent = 'Done!';
+  document.getElementById('navArea').style.display = 'none';
+  document.getElementById('mainArea').innerHTML = `
+    <div class="result-card">
+      <span class="big">${r.emoji}</span>
+      <h2>${r.title}</h2>
+      <div class="sub">${r.sub}</div>
+      <div class="ideas">
+        <div class="ideas-title">🍴 You might want…</div>
+        ${r.ideas.map(i=>`
+          <div class="idea-item"><div class="dot"></div>${i}</div>
+        `).join('')}
+      </div>
+      <button class="btn-restart" onclick="restart()">↩ Try again</button>
+    </div>
+  `;
+}
+
+function restart() {
+  cur = 0;
+  ans = new Array(Qs.length).fill(null);
+  document.getElementById('navArea').style.display = 'flex';
+  render();
+}
+
+render();
+</script>
+</body>
+</html>
