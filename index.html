@@ -9,7 +9,7 @@
 * { margin:0; padding:0; box-sizing:border-box; }
 
 :root {
-  --bg: #0d0d0d;
+  --background: #0d0d0d;
   --surface: #161616;
   --border: #2a2a2a;
   --text: #f0ece4;
@@ -21,7 +21,7 @@
 }
 
 body {
-  background: var(--bg);
+  background: var(--background);
   color: var(--text);
   font-family: 'Epilogue', sans-serif;
   min-height: 100vh;
@@ -32,7 +32,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Ambient blobs */
 body::before, body::after {
   content: '';
   position: fixed;
@@ -41,12 +40,14 @@ body::before, body::after {
   pointer-events: none;
   z-index: 0;
 }
+
 body::before {
   width: 500px; height: 500px;
   background: radial-gradient(circle, #ff5c3520 0%, transparent 70%);
   top: -100px; left: -100px;
   animation: drift1 10s ease-in-out infinite alternate;
 }
+
 body::after {
   width: 400px; height: 400px;
   background: radial-gradient(circle, #ffb80018 0%, transparent 70%);
@@ -64,7 +65,6 @@ body::after {
   max-width: 520px;
 }
 
-/* HEADER */
 .header {
   margin-bottom: 36px;
   animation: fadeUp .6s cubic-bezier(.2,.8,.2,1) both;
@@ -84,6 +84,7 @@ body::after {
   color: var(--muted);
   margin-bottom: 18px;
 }
+
 .header .tag span { color: var(--accent); font-size: 1rem; }
 
 .header h1 {
@@ -95,10 +96,12 @@ body::after {
 }
 
 .header h1 .hi { color: var(--text); }
+
 .header h1 .hungry {
   color: transparent;
   -webkit-text-stroke: 1.5px var(--accent);
 }
+
 .header h1 .help { color: var(--accent2); }
 
 .header p {
@@ -109,7 +112,6 @@ body::after {
   line-height: 1.5;
 }
 
-/* PROGRESS */
 .progress-wrap {
   display: flex;
   align-items: center;
@@ -117,6 +119,7 @@ body::after {
   margin-bottom: 28px;
   animation: fadeUp .6s .1s cubic-bezier(.2,.8,.2,1) both;
 }
+
 .progress-track {
   flex: 1;
   height: 3px;
@@ -124,12 +127,14 @@ body::after {
   border-radius: 99px;
   overflow: hidden;
 }
+
 .progress-fill {
   height: 100%;
   background: linear-gradient(90deg, var(--accent), var(--accent2));
   border-radius: 99px;
   transition: width .5s cubic-bezier(.4,0,.2,1);
 }
+
 .progress-label {
   font-size: .75rem;
   color: var(--muted);
@@ -137,7 +142,6 @@ body::after {
   font-weight: 300;
 }
 
-/* CARD */
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -173,10 +177,11 @@ body::after {
   display: grid;
   gap: 10px;
 }
+
 .options.col2 { grid-template-columns: 1fr 1fr; }
 
 .opt {
-  background: var(--bg);
+  background: var(--background);
   border: 1.5px solid var(--border);
   border-radius: 14px;
   padding: 16px 14px;
@@ -214,7 +219,6 @@ body::after {
 
 .opt.selected .label { color: var(--accent2); }
 
-/* NAV */
 .nav {
   display: flex;
   justify-content: space-between;
@@ -233,7 +237,9 @@ body::after {
   transition: color .2s;
   padding: 8px 0;
 }
+
 .btn-back:hover { color: var(--text); }
+
 .btn-back:disabled { opacity:.25; cursor:default; }
 
 .btn-next {
@@ -250,18 +256,19 @@ body::after {
   box-shadow: 0 0 0 0 #ff5c3500;
   letter-spacing: .02em;
 }
+
 .btn-next:hover:not(:disabled) {
   background: #ff3a10;
   transform: translateY(-2px);
   box-shadow: 0 8px 30px #ff5c3540;
 }
+
 .btn-next:disabled {
   background: #2a2a2a;
   color: #444;
   cursor: default;
 }
 
-/* RESULT */
 .result-card {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -296,7 +303,7 @@ body::after {
 }
 
 .ideas {
-  background: var(--bg);
+  background: var(--background);
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 20px 20px;
@@ -323,7 +330,9 @@ body::after {
   color: var(--text);
   font-weight: 300;
 }
+
 .idea-item:last-child { border-bottom: none; padding-bottom: 0; }
+
 .idea-item .dot {
   width: 6px; height: 6px;
   border-radius: 50%;
@@ -342,6 +351,7 @@ body::after {
   cursor: pointer;
   transition: all .2s;
 }
+
 .btn-restart:hover {
   border-color: #555;
   color: var(--text);
@@ -362,9 +372,9 @@ body::after {
     <h1>
       <span class="hi">Hey </span><span class="name">Annie,</span><br>
       <span class="hungry">hungry?</span><br>
-      <span class="help">let's help.</span>
+      <span class="help">let me help you.</span>
     </h1>
-    <p>Answer quick questions! Don'y worry, we will figure out what you want to eat.</p>
+    <p>Answer 7 quick questions. Don't worry, no wrong answers! We will figure out what you want to eat.</p>
   </div>
 
   <div class="progress-wrap">
@@ -387,7 +397,7 @@ const Qs = [
     q: "How hungry are you right now?",
     col2: true,
     opts: [
-      { icon:"🍃", label:"Tiny craving" },
+      { icon:"🍃", label:"Just a little something" },
       { icon:"😐", label:"Moderately hungry" },
       { icon:"😤", label:"Pretty hungry" },
       { icon:"🦁", label:"Absolutely starving" },
@@ -398,13 +408,13 @@ const Qs = [
     col2: true,
     opts: [
       { icon:"🍬", label:"Sweet" },
-      { icon:"🧂", label:"Savoury" },
+      { icon:"🧂", label:"Savory" },
       { icon:"🤷", label:"Both! Why choose?" },
       { icon:"😶", label:"No real preference" },
     ]
   },
   {
-    q: "Warm & comforting or fresh & cold?",
+    q: "Warm & comforting or cold & refreshing?",
     col2: true,
     opts: [
       { icon:"♨️", label:"Warm & cozy" },
@@ -416,9 +426,9 @@ const Qs = [
     q: "What's your current mood?",
     col2: true,
     opts: [
-      { icon:"🛋️", label:"Tired, I need comfort" },
-      { icon:"🎉", label:"Happy & celebration" },
-      { icon:"😮‍💨", label:"Stressed, I need calm" },
+      { icon:"🛋️", label:"Tired, need comfort" },
+      { icon:"🎉", label:"Happy & treating myself" },
+      { icon:"😮‍💨", label:"Stressed, need calm" },
       { icon:"😌", label:"Just chilling" },
     ]
   },
@@ -433,113 +443,330 @@ const Qs = [
     ]
   },
   {
-    q: "How much cooking effort are you up for?",
+    q: "How much effort can you be bothered with?",
     col2: true,
     opts: [
-      { icon:"📱", label:"Zero, I just want to order it" },
+      { icon:"📱", label:"Zero, just order it" },
       { icon:"🔥", label:"Heat something up" },
       { icon:"🍳", label:"Quick cook is fine" },
-      { icon:"👨‍🍳", label:"I want to actually cook" },
+      { icon:"👨‍🍳", label:"I actually want to cook" },
     ]
   },
   {
-    q: "Any cuisine calling your name?",
+    q: "Any flavour world calling you?",
     col2: true,
     opts: [
-      { icon:"🍝", label:"Italian vibes" },
-      { icon:"🥢", label:"Asian flavours" },
-      { icon:"🥘", label:"Classic comfort food" },
-      { icon:"🤷", label:"No preference" },
+      { icon:"🌎", label:"Asian & Southeast Asian" },
+      { icon:"🍝", label:"Italian / European" },
+      { icon:"🍲", label:"Classic comfort food" },
+      { icon:"🤷", label:"Surprise me" },
     ]
   }
 ];
 
 const Results = {
   get: (a) => {
-    const hungry  = a[0]; // 0-3
-    const taste   = a[1]; // 0=sweet,1=savoury,2=both,3=none
-    const temp    = a[2]; // 0=warm,1=cold,2=either
-    const mood    = a[3]; // 0=tired,1=happy,2=stressed,3=chill
-    const texture = a[4]; // 0=soft,1=crunchy,2=chewy,3=light
-    const effort  = a[5]; // 0-3
-    const cuisine = a[6]; // 0=italian,1=asian,2=comfort,3=
+    const hunger  = a[0]; // 0=tiny, 1=moderate, 2=pretty, 3=starving
+    const taste   = a[1]; // 0=sweet, 1=savoury, 2=both, 3=no pref
+    const temp    = a[2]; // 0=warm, 1=cold, 2=either
+    const mood    = a[3]; // 0=tired, 1=happy, 2=stressed, 3=chill
+    const texture = a[4]; // 0=soft/creamy, 1=crunchy, 2=chewy, 3=light/fresh
+    const effort  = a[5]; // 0=order, 1=heat, 2=quick cook, 3=full cook
+    const cuisine = a[6]; // 0=asian, 1=italian/euro, 2=comfort, 3=surprise
 
-    // Sweet path
+    // ── SWEET PATH ─────────────────────────────────────────────────────────
     if (taste === 0) {
-      if (hungry <= 1) return {
-        emoji:"🥞", title:"Light Sweet Treat",
-        sub:"Small • Comforting • Sweet",
-        ideas:["Crêpes with Nutella & banana","French toast with fruit","Warm cinnamon roll","Yogurt with honey & granola"]
+
+      if (temp !== 0 && texture === 0) {
+        if (hunger <= 1) return {
+          emoji:"🍧", title:"Bingsu or Ice Cream?",
+          sub:"Cold • Creamy • Annie's Signature Order",
+          note:"You literally always end up here and you know it 😂",
+          ideas: [
+            "Bingsu, milk or mango shaved ice with red bean & condensed milk",
+            "Chocolate chips ice cream (two scoops, obviously)",
+            "Chocolate mint gelato, underrated, you know it's good",
+            "Franui frozen raspberry coated in chocolate, the one, the only"
+          ]
+        };
+        return {
+          emoji:"🍨", title:"Full-On Cold Moment",
+          sub:"Indulgent • Cold • Dreamy",
+          note:"Hungry but still want sweet? Cold energy.",
+          ideas:[
+            "Chocolate ice cream sundae with a chunk of brownie",
+            "Bingsu, large portion with all the toppings",
+            "Franui frozen raspberry coated in chocolate, eat it straight from the box",
+            "Big bowl of every ice cream you have in the freezer"
+          ]
+        };
+      }
+
+      if (temp !== 1 && (texture === 0 || texture === 2)) {
+        if (mood === 0 || mood === 2) return {
+          emoji:"🥞", title:"Fluffy Comfort",
+          sub:"Warm • Soft • Feel-Good",
+          note:"Comfort food + sweet.",
+          ideas:[
+            "Japanese fluffy pancakes, extra fluffy",
+            "Classic pancakes with chocolate sauce & banana",
+            "Strawberry shortcake, your comfort go-to",
+            "French toast with berries & whipped cream"
+          ]
+        };
+        return {
+          emoji:"🍓", title:"Fruity Mood",
+          sub:"Sweet • Fruity • Celebratory",
+          note:"Happy and sweet? Desserts are the answer.",
+          ideas:[
+            "Strawberry shortcake & cream, perfect as always",
+            "Fluffy pancakes with fresh raspberry & maple syrup",
+            "Crêpes with berries & cream",
+            "Starbucks strawberry drink + a pastry on the side"
+          ]
+        };
+      }
+
+      if (temp === 1 && texture === 3) return {
+        emoji:"🍓", title:"Fresh & Fruity Pick-Me-Up",
+        sub:"Light • Cold • Refreshing",
+        note:"Sweet but light, smoothie or fruit bowl energy.",
+        ideas:[
+          "Açaí bowl with strawberry, banana & granola",
+          "Fruit salad with chocolate drizzle (yes, it works)",
+          "Starbucks refresher or matcha latte (no coffee!)",
+          "Strawberry pie, with a lot of strawberry for sure"
+        ]
       };
-      if (temp === 1) return {
-        emoji:"🍦", title:"Cold & Sweet",
-        sub:"Refreshing • Indulgent",
-        ideas:["Smoothie bowl","Ice cream sundae","Açaí bowl with toppings","Frozen yogurt with fruit"]
+
+      if (texture === 1) return {
+        emoji:"🍪", title:"Sweet Crunch",
+        sub:"Sweet • Crunchy • Easy",
+        note:"Classic snack mode, no shame.",
+        ideas:[
+          "Cookies, chocolate chip or double chocolate",
+          "Waffles bites or mini churros with chocolate dip",
+          "Candy mix, pick your favourites",
+          "Chocolate-covered pretzels, sweet and crunchy, best of both"
+        ]
       };
+
       return {
-        emoji:"🧇", title:"Filling Sweet Meal",
-        sub:"Substantial • Warm • Sweet",
-        ideas:["Waffles with whipped cream & berries","Banana pancakes","French toast tower","Pain perdu with caramel"]
+        emoji:"🍫", title:"Chocolate Moment",
+        sub:"Sweet • Satisfying • Classic Annie",
+        note:"When in doubt, chocolate is the solution. You know this.",
+        ideas:[
+          "Warm chocolate fondant with vanilla ice cream",
+          "Franui frozen raspberry coated in chocolate, straight from the freezer",
+          "Hot chocolate (rich, not too sweet)",
+          "Starbucks chocolate-based drink + a pastry"
+        ]
       };
     }
 
-    // Savoury path
+    // ── SAVOURY PATH ──────────────────────────────────────────────────────────
     if (taste === 1) {
-      if (cuisine === 1) return temp === 0 ? {
-        emoji:"🍜", title:"Asian Warm Bowl",
-        sub:"Umami • Cozy • Satisfying",
-        ideas:["Ramen with soft-boiled egg","Fried rice with veggies","Gyoza + miso soup","Udon noodles"]
-      } : {
-        emoji:"🥗", title:"Fresh Asian Plate",
-        sub:"Light • Bright • Flavourful",
-        ideas:["Poke bowl","Vietnamese summer rolls","Cold soba salad","Edamame & sushi platter"]
-      };
-      if (cuisine === 3) return {
-        emoji:"🌮", title:"Mexican Feast",
-        sub:"Spicy • Bold • Satisfying",
-        ideas:["Tacos (chicken or beef)","Burrito bowl with guac","Nachos loaded up","Quesadilla with salsa"]
-      };
-      if (cuisine === 0) return hungry >= 2 ? {
-        emoji:"🍝", title:"Hearty Italian",
-        sub:"Rich • Comforting • Filling",
-        ideas:["Spaghetti carbonara","Penne arrabbiata","Pizza Margherita","Gnocchi al pomodoro"]
-      } : {
-        emoji:"🍕", title:"Light Italian Bites",
-        sub:"Easy • Delicious",
-        ideas:["Bruschetta","Small pasta portion","Caprese salad","Pizza toast"]
-      };
-      // comfort
-      if (hungry <= 1) return {
-        emoji:"🧀", title:"Classic Comfort Snack",
-        sub:"Cozy • Small • Satisfying",
-        ideas:["Grilled cheese sandwich","Soup & crusty bread","Scrambled eggs on toast","Mac & cheese (small)"]
-      };
+
+      if (cuisine === 0) {
+        if (temp !== 1 && hunger >= 2) return {
+          emoji:"🍛", title:"Laos Fried Rice (Nam Khao)",
+          sub:"Warm • Crispy Rice • Full Flavor",
+          note:"You like this dish, so go for it.",
+          ideas:[
+            "Nam khao, Laos crispy rice salad with herbs & pork",
+            "Laos fried rice with beef & tomatoes",
+            "Laos khao piak, rice noodle soup with pork",
+            "Beef laab with sticky rice, bold & satisfying"
+          ]
+        };
+        if (temp === 1 || texture === 3) return {
+          emoji:"🥗", title:"Tum Mak Hoong Vibes",
+          sub:"Fresh • Spicy • Light",
+          note:"Papaya salad is perfect, isn't it?",
+          ideas:[
+            "Papaya salad tum mak hoong, classic, with beef jerky not shrimp",
+            "Sushi platter, salmon, tuna, avocado rolls (no shrimp)",
+            "Green mango salad with crispy shallots",
+            "Lemongrass beef skewers with fresh herb plate"
+          ]
+        };
+        return {
+          emoji:"🍜", title:"Southeast Asian Comfort Bowl",
+          sub:"Warm • Aromatic • Filling",
+          note:"Southeast Asian food hits different. This one's for you.",
+          ideas:[
+            "Ramen with big chunk of Chashu, rich broth",
+            "Chicken satay skewer, spicy and easy to eat!",
+            "Tom kha gai, coconut milk soup with pork or chicken",
+            "Fried rice with pork & egg, Thai-style"
+          ]
+        };
+      }
+
+      if (cuisine === 1) {
+        if (mood === 0 || mood === 2) return {
+          emoji:"🍝", title:"Lasagna Night",
+          sub:"Rich • Cheesy • Annie's Best Dish",
+          note:"Your best dish and your favourite dish? This is fate.",
+          ideas:[
+            "Classic beef lasagna with a lot of bolognese, your signature, make it properly",
+            "Bolognese pasta, with tones of bolognese",
+            "Spaghetti with beef & fresh tomatoes (extra beef and extra tomatoes)",
+            "Pasta al forno, baked pasta with béchamel & beef"
+          ]
+        };
+        if (hunger <= 1) return {
+          emoji:"🍅", title:"Light Italian Bites",
+          sub:"Easy • Fresh • Flavourful",
+          note:"Tomatoes are your friend and Italy agrees.",
+          ideas:[
+            "Bruschetta with fresh tomatoes, basil & olive oil",
+            "Caprese salad, tomato, mozzarella, basil",
+            "Panzanella, Tomato & bread salad",
+            "Small bowl of pasta with pomodoro sauce"
+          ]
+        };
+        return {
+          emoji:"🍝", title:"Hearty Pasta Moment",
+          sub:"Filling • Comforting • Italian",
+          note:"Bolognese pasta or lasagna, you can't go wrong either way.",
+          ideas:[
+            "Bolognese pasta, classic bolognese, beef-forward and rich",
+            "Pasta with beef, a lot of bolognese and béchamel",
+            "Tagliatelle with beef ragù & parmesan",
+            "Gnocchi with tomato & beef sauce"
+          ]
+        };
+      }
+
+      if (cuisine === 2) {
+        if (texture === 0 && temp !== 1) return {
+          emoji:"🥘", title:"Soft & Warming Comfort",
+          sub:"Cozy • Hearty • No Fuss",
+          note:"Cold outside energy = this exact meal.",
+          ideas:[
+            "Beef stew with crusty bread, slow-cooked, rich",
+            "Shepherd's pie (beef version)",
+            "Pulled pork with mash & gravy",
+            "Creamy tomato soup with grilled pork toast"
+          ]
+        };
+        if (hunger >= 2) return {
+          emoji:"🥩", title:"Proper Beef & Pork Meal",
+          sub:"Filling • Satisfying • Meaty",
+          note:"Beef or pork, you know what you like, no fish needed.",
+          ideas:[
+            "Beef burger with tomatoes, lettuce & no weird sauce",
+            "Pork ribs with BBQ glaze & coleslaw",
+            "Steak with roasted tomatoes & fries",
+            "Slow-cooked beef with rice, simple and perfect"
+          ]
+        };
+        return {
+          emoji:"🥪", title:"Easy Comfort Food",
+          sub:"Classic • Simple • Satisfying",
+          note:"Sometimes simple is exactly right.",
+          ideas:[
+            "Beef & tomato sandwich on sourdough",
+            "Pork banh mi, crispy, herby, crunchy",
+            "BLT with extra tomato (yes, extra)",
+            "Beef patty melt with caramelised onions"
+          ]
+        };
+      }
+
       return {
-        emoji:"🥘", title:"Big Comfort Meal",
-        sub:"Hearty • Warming • Filling",
-        ideas:["Shepherd's pie","Roast chicken & veg","Beef stew","Loaded baked potato"]
+        emoji:"🍅", title:"Annie's Wildcard Plate",
+        sub:"Bold • Personal • Totally You",
+        note:"No preference means we pick what you actually love.",
+        ideas:[
+          "Tum mak hoong + nam khao, the dream duo",
+          "Beef pho with extra herbs",
+          "Lasagna leftovers (always better day 2)",
+          "Pork fried rice with tomato & egg, extra crispy"
+        ]
       };
     }
 
-    // Both / no preference
-    if (hungry <= 1) return {
-      emoji:"🍱", title:"Mixed Snack Board",
-      sub:"Light • Varied • Easy",
-      ideas:["Cheese & fruit board","Crackers with hummus & jam","Charcuterie plate","Yogurt parfait"]
+    // ── BOTH SWEET & SAVOURY / NO PREF ─────────────────────────────────────
+    
+    if (mood === 1) {
+      if (temp !== 0) return {
+        emoji:"🍧", title:"Treat Yourself Good",
+        sub:"Sweet • Savoury • Celebration Mode",
+        note:"Happy Annie deserves the best.",
+        ideas:[
+          "Savory first: Bolognese pasta",
+          "Then: ice cream or Franui frozen raspberry coated in chocolate for dessert",
+          "Starbucks matcha latte to sip on the side (no coffee!)",
+          "A slice of cake if you're feeling celebratory, you deserve it"
+        ]
+      };
+      return {
+        emoji:"🎉", title:"Celebration Meal Combo",
+        sub:"Hearty then Sweet • Full Feast",
+        note:"You're happy, eat what you love, in order.",
+        ideas:[
+          "Lasagna as the main, your best dish",
+          "Macaron while you wait for the food to cook",
+          "Starbucks matcha latte to sip on the side (no coffee!)",
+          "And Cheesecake, start to finish"
+        ]
+      };
+    }
+
+    if (mood === 0 || mood === 2) {
+      if (temp !== 1) return {
+        emoji:"🛋️", title:"Maximum Comfort Mode",
+        sub:"Warm • Soft • No Stress",
+        note:"You need cozy food and zero decisions. This is it.",
+        ideas:[
+          "Lasagna, warm, rich, effort-free if you order it",
+          "Fluffy pancakes with chocolate sauce, quick to make",
+          "Ramen, broth heals everything",
+          "Warm chocolate fondant with ice cream for after"
+        ]
+      };
+      return {
+        emoji:"❄️", title:"Chill & Low-Effort Combo",
+        sub:"Cold • Easy • Calming",
+        note:"Stress calls for cold and easy. You've got this.",
+        ideas:[
+          "Ice cream, order it, eat it in peace",
+          "Pizza takeaway, no cooking required",
+          "Macaron from the best bakery",
+          "Starbucks cold drink (no coffee) + something small to eat"
+        ]
+      };
+    }
+
+    if (hunger <= 1) return {
+      emoji:"🍱", title:"Light Mixed Bites",
+      sub:"Easy • Varied • Low Commitment",
+      note:"Not super hungry, just want a little something good.",
+      ideas:[
+        "Caprese salad with fresh tomatoes, simple & perfect",
+        "Bruschetta with tomatoes & olive oil",
+        "Small bowl of salad",
+        "Starbucks drink + small snack to pair"
+      ]
     };
-    if (temp === 0) return {
-      emoji:"🍲", title:"Warm Balanced Meal",
-      sub:"Hearty • Satisfying",
-      ideas:["Tomato soup + grilled cheese","Stir-fry with rice","Quiche & green salad","Buddha bowl (warm)"]
-    };
+
     return {
-      emoji:"🥗", title:"Fresh & Balanced",
-      sub:"Light • Clean • Energising",
-      ideas:["Big grain salad","Poke bowl","Mezze platter","Cold noodle bowl"]
+      emoji:"🍲", title:"Balanced & Satisfying",
+      sub:"Warm • Filling • Classic Annie",
+      note:"A bit of everything, your comfort zone.",
+      ideas:[
+        "Fried rice with eggs and pork, quick, easy, perfect",
+        "Crêpe with ham and cheese + small green salad",
+        "Mango with sticky rice on the side",
+        "Xiao long bao, with extra broth"
+      ]
     };
   }
 };
 
+// ─── APP STATE ────────────────────────────────────────────────────────────────
 let cur = 0;
 let ans = new Array(Qs.length).fill(null);
 
@@ -596,10 +823,11 @@ function showResult() {
       <span class="big">${r.emoji}</span>
       <h2>${r.title}</h2>
       <div class="sub">${r.sub}</div>
+      ${r.note ? `<div class="annie-note">💬 ${r.note}</div>` : ''}
       <div class="ideas">
         <div class="ideas-title">🍴 You might want…</div>
-        ${r.ideas.map(i=>`
-          <div class="idea-item"><div class="dot"></div>${i}</div>
+        ${r.ideas.map(idea=>`
+          <div class="idea-item"><div class="dot"></div>${idea}</div>
         `).join('')}
       </div>
       <button class="btn-restart" onclick="restart()">↩ Try again</button>
