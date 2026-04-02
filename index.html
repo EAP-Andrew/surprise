@@ -456,8 +456,8 @@ const Qs = [
     q: "Any flavour world calling you?",
     col2: true,
     opts: [
-      { icon:"🌎", label:"Asian & Southeast Asian" },
-      { icon:"🍝", label:"Italian / European" },
+      { icon:"🌏", label:"Asian & Southeast Asian" },
+      { icon:"🍝", label:"European specialities" },
       { icon:"🍲", label:"Classic comfort food" },
       { icon:"🤷", label:"Surprise me" },
     ]
@@ -472,94 +472,94 @@ const Results = {
     const mood    = a[3]; // 0=tired, 1=happy, 2=stressed, 3=chill
     const texture = a[4]; // 0=soft/creamy, 1=crunchy, 2=chewy, 3=light/fresh
     const effort  = a[5]; // 0=order, 1=heat, 2=quick cook, 3=full cook
-    const cuisine = a[6]; // 0=asian, 1=italian/euro, 2=comfort, 3=surprise
+    const cuisine = a[6]; // 0=asian, 1=italian/french, 2=comfort, 3=surprise
 
     // ── SWEET PATH ─────────────────────────────────────────────────────────
     if (taste === 0) {
 
       if (temp !== 0 && texture === 0) {
         if (hunger <= 1) return {
-          emoji:"🍧", title:"Bingsu or Ice Cream?",
-          sub:"Cold • Creamy • Annie's Signature Order",
-          note:"You literally always end up here and you know it 😂",
+          emoji:"🍧", title:"Something cold & creamy",
+          sub:"Cold • Creamy • Light",
+          note:"You know exactly where this is going 😂",
           ideas: [
-            "Bingsu, milk or mango shaved ice with red bean & condensed milk",
-            "Chocolate chips ice cream (two scoops, obviously)",
-            "Chocolate mint gelato, underrated, you know it's good",
-            "Franui frozen raspberry coated in chocolate, the one, the only"
+            "Bingsu with mango, red bean & condensed milk",
+            "Chocolate chips ice cream, two scoops, no debate",
+            "Mint chocolate gelato, underrated and you know it",
+            "Franui frozen raspberries coated in chocolate, straight from the box"
           ]
         };
         return {
-          emoji:"🍨", title:"Full-On Cold Moment",
-          sub:"Indulgent • Cold • Dreamy",
-          note:"Hungry but still want sweet? Cold energy.",
+          emoji:"🍨", title:"A cold dessert moment",
+          sub:"Indulgent • Cold • No Regrets",
+          note:"Hungry but sweet? Cold energy it is.",
           ideas:[
-            "Chocolate ice cream sundae with a chunk of brownie",
-            "Bingsu, large portion with all the toppings",
-            "Franui frozen raspberry coated in chocolate, eat it straight from the box",
-            "Big bowl of every ice cream you have in the freezer"
+            "Ice cream sundae with warm brownie on the side",
+            "Bingsu, large portion, all the toppings",
+            "Mochi ice cream, a few different flavours",
+            "Frozen yogurt with fresh fruit & honey drizzle"
           ]
         };
       }
 
       if (temp !== 1 && (texture === 0 || texture === 2)) {
         if (mood === 0 || mood === 2) return {
-          emoji:"🥞", title:"Fluffy Comfort",
+          emoji:"🥞", title:"Soft, warm & comforting",
           sub:"Warm • Soft • Feel-Good",
-          note:"Comfort food + sweet.",
+          note:"Sometimes you just need something pillowy and sweet.",
           ideas:[
-            "Japanese fluffy pancakes, extra fluffy",
-            "Classic pancakes with chocolate sauce & banana",
-            "Strawberry shortcake, your comfort go-to",
-            "French toast with berries & whipped cream"
+            "Japanese fluffy pancakes, the tall ones",
+            "Classic pancakes with chocolate sauce & sliced banana",
+            "French toast with berries & a cloud of whipped cream",
+            "Warm crêpes with sugar, simple and perfect"
           ]
         };
         return {
-          emoji:"🍓", title:"Fruity Mood",
-          sub:"Sweet • Fruity • Celebratory",
-          note:"Happy and sweet? Desserts are the answer.",
+          emoji:"🍓", title:"Sweet & a little celebratory",
+          sub:"Sweet • Fruity • Feel-Good",
+          note:"Happy mood calls for pretty food.",
           ideas:[
-            "Strawberry shortcake & cream, perfect as always",
-            "Fluffy pancakes with fresh raspberry & maple syrup",
-            "Crêpes with berries & cream",
-            "Starbucks strawberry drink + a pastry on the side"
+            "Strawberry shortcake with fresh cream, your comfort classic",
+            "Waffles with berries & crème chantilly",
+            "Mont Blanc, chestnut cream & meringue, very French, very good",
+            "Fresh fruit tart from a bakery"
           ]
         };
       }
 
       if (temp === 1 && texture === 3) return {
-        emoji:"🍓", title:"Fresh & Fruity Pick-Me-Up",
-        sub:"Light • Cold • Refreshing",
-        note:"Sweet but light, smoothie or fruit bowl energy.",
+        emoji:"🫐", title:"Fresh, light & fruity",
+        sub:"Cold • Light • Refreshing",
+        note:"Not heavy at all, exactly what you need.",
         ideas:[
-          "Açaí bowl with strawberry, banana & granola",
-          "Fruit salad with chocolate drizzle (yes, it works)",
-          "Starbucks refresher or matcha latte (no coffee!)",
-          "Strawberry pie, with a lot of strawberry for sure"
+          "Açaí bowl with strawberry, banana & a little granola",
+          "Fruit salad with a chocolate drizzle (yes, it works, trust)",
+          "Starbucks refresher or iced matcha latte (no coffee!)",
+          "Three-colour dessert drink, cold & fun"
         ]
       };
 
       if (texture === 1) return {
-        emoji:"🍪", title:"Sweet Crunch",
+        emoji:"🍪", title:"Sweet & crunchy snack mode",
         sub:"Sweet • Crunchy • Easy",
-        note:"Classic snack mode, no shame.",
+        note:"No shame, classic snack brain.",
         ideas:[
-          "Cookies, chocolate chip or double chocolate",
-          "Waffles bites or mini churros with chocolate dip",
-          "Candy mix, pick your favourites",
-          "Chocolate-covered pretzels, sweet and crunchy, best of both"
+          "Double chocolate chip cookies, warm if possible",
+          "Mini churros with chocolate dipping sauce",
+          "Chocolate-covered pretzels, sweet & salty, best combo",
+          "Stroopwafel, one of those unexpectedly good things"
         ]
       };
 
       return {
-        emoji:"🍫", title:"Chocolate Moment",
-        sub:"Sweet • Satisfying • Classic Annie",
-        note:"When in doubt, chocolate is the solution. You know this.",
+        emoji:"🍫", title:"Full chocolate moment",
+        sub:"Rich • Sweet • Very You",
+        note:"When in doubt. You know the answer is chocolate.",
         ideas:[
-          "Warm chocolate fondant with vanilla ice cream",
-          "Franui frozen raspberry coated in chocolate, straight from the freezer",
-          "Hot chocolate (rich, not too sweet)",
-          "Starbucks chocolate-based drink + a pastry"
+          "Warm chocolate fondant with a scoop of vanilla ice cream",
+          "Rich hot chocolate, not too sweet, proper thick",
+          "Franui frozen raspberries coated in chocolate, from the freezer",
+          "Chocolate lava cake, order it or make it, both are fine"
         ]
       };
     }
@@ -569,198 +569,199 @@ const Results = {
 
       if (cuisine === 0) {
         if (temp !== 1 && hunger >= 2) return {
-          emoji:"🍛", title:"Laos Fried Rice (Nam Khao)",
-          sub:"Warm • Crispy Rice • Full Flavor",
-          note:"You like this dish, so go for it.",
+          emoji:"🍛", title:"Bold, warm & filling, Southeast Asian",
+          sub:"Warm • Crispy • Full Flavour",
+          note:"You came here, you knew what you wanted.",
           ideas:[
             "Nam khao, Laos crispy rice salad with herbs & pork",
-            "Laos fried rice with beef & tomatoes",
-            "Laos khao piak, rice noodle soup with pork",
-            "Beef laab with sticky rice, bold & satisfying"
+            "Nem nướng, Vietnamese grilled pork skewers with fresh herbs & rice paper",
+            "Khao piak, slow rice noodle soup with pork",
+            "Beef laab with sticky rice, bold and satisfying"
           ]
         };
         if (temp === 1 || texture === 3) return {
-          emoji:"🥗", title:"Tum Mak Hoong Vibes",
-          sub:"Fresh • Spicy • Light",
-          note:"Papaya salad is perfect, isn't it?",
+          emoji:"🥗", title:"Fresh, punchy & light, Asian style",
+          sub:"Fresh • Herby • No Heavy Feeling",
+          note:"Light but never boring, that's the whole point.",
           ideas:[
-            "Papaya salad tum mak hoong, classic, with beef jerky not shrimp",
-            "Sushi platter, salmon, tuna, avocado rolls (no shrimp)",
-            "Green mango salad with crispy shallots",
-            "Lemongrass beef skewers with fresh herb plate"
+            "Tum mak hoong, classic papaya salad with beef jerky",
+            "Spring rolls with pork and shrimps ?",
+            "Green mango salad with crispy shallots & toasted sesame",
+            "Lemongrass beef skewer plate with a big bowl of rice on the side"
           ]
         };
         return {
-          emoji:"🍜", title:"Southeast Asian Comfort Bowl",
-          sub:"Warm • Aromatic • Filling",
-          note:"Southeast Asian food hits different. This one's for you.",
+          emoji:"🍜", title:"Warm, aromatic broth & noodles",
+          sub:"Warm • Fragrant • Comforting",
+          note:"A good bowl fixes a lot of things.",
           ideas:[
-            "Ramen with big chunk of Chashu, rich broth",
-            "Chicken satay skewer, spicy and easy to eat!",
-            "Tom kha gai, coconut milk soup with pork or chicken",
-            "Fried rice with pork & egg, Thai-style"
+            "Phở, beef noodle soup with thin slices of beef & fresh herbs",
+            "Ramen with chashu pork, rich tonkotsu broth, soft egg",
+            "Tom kha gai, coconut milk & lemongrass soup with chicken",
+            "Bún bò Huế, spicy lemongrass beef noodle soup (without pepper !)"
           ]
         };
       }
 
       if (cuisine === 1) {
         if (mood === 0 || mood === 2) return {
-          emoji:"🍝", title:"Lasagna Night",
-          sub:"Rich • Cheesy • Annie's Best Dish",
-          note:"Your best dish and your favourite dish? This is fate.",
+          emoji:"🍝", title:"Rich, slow-cooked & deeply satisfying",
+          sub:"Hearty • Comforting • Worth the Wait",
+          note:"Your best dish is also your comfort dish. Not a coincidence.",
           ideas:[
-            "Classic beef lasagna with a lot of bolognese, your signature, make it properly",
-            "Bolognese pasta, with tones of bolognese",
-            "Spaghetti with beef & fresh tomatoes (extra beef and extra tomatoes)",
-            "Pasta al forno, baked pasta with béchamel & beef"
+            "Classic beef lasagna with a lot of bolognese, your signature",
+            "Slowly-braised beef cheek with carrots & red wine",
+            "Bœuf bourguignon, the real French one, low heat, long time",
+            "Spaghetti bolognese, extra beef, extra tomato, extra everything"
           ]
         };
         if (hunger <= 1) return {
-          emoji:"🍅", title:"Light Italian Bites",
-          sub:"Easy • Fresh • Flavourful",
-          note:"Tomatoes are your friend and Italy agrees.",
+          emoji:"🍅", title:"Light, fresh & very Italian",
+          sub:"Simple • Fresh • No Effort",
+          note:"Tomatoes are your love language and Italy agrees.",
           ideas:[
-            "Bruschetta with fresh tomatoes, basil & olive oil",
-            "Caprese salad, tomato, mozzarella, basil",
-            "Panzanella, Tomato & bread salad",
-            "Small bowl of pasta with pomodoro sauce"
+            "Bruschetta with fresh tomatoes, basil & good olive oil",
+            "Caprese salad, proper mozzarella, ripe tomatoes, fresh basil",
+            "Panzanella, Tuscan bread & tomato salad with a little vinegar",
+            "Small bowl of pasta al pomodoro, nothing else needed"
           ]
         };
         return {
-          emoji:"🍝", title:"Hearty Pasta Moment",
-          sub:"Filling • Comforting • Italian",
-          note:"Bolognese pasta or lasagna, you can't go wrong either way.",
+          emoji:"🍝", title:"A proper pasta moment",
+          sub:"Filling • Italian • No Regrets",
+          note:"Pasta is always the answer, pick your shape.",
           ideas:[
-            "Bolognese pasta, classic bolognese, beef-forward and rich",
-            "Pasta with beef, a lot of bolognese and béchamel",
-            "Tagliatelle with beef ragù & parmesan",
-            "Gnocchi with tomato & beef sauce"
+            "Tagliatelle with slow beef ragù & a handful of parmesan",
+            "Gnocchi with tomato & beef sauce, pillowy and rich",
+            "Pasta al forno, baked with béchamel & beef, crusty on top",
+            "Rigatoni all'amatriciana, tomato & pork"
           ]
         };
       }
 
       if (cuisine === 2) {
         if (texture === 0 && temp !== 1) return {
-          emoji:"🥘", title:"Soft & Warming Comfort",
-          sub:"Cozy • Hearty • No Fuss",
-          note:"Cold outside energy = this exact meal.",
+          emoji:"🥘", title:"Slow-cooked, soft & deeply warming",
+          sub:"Cozy • Rich • No Fuss",
+          note:"This is exactly what cold-outside energy calls for.",
           ideas:[
-            "Beef stew with crusty bread, slow-cooked, rich",
-            "Shepherd's pie (beef version)",
-            "Pulled pork with mash & gravy",
-            "Creamy tomato soup with grilled pork toast"
+            "Slowy-braised beef with vegetables & crusty bread",
+            "Shepherd's pie, beef version, with a thick mashed potato top",
+            "Sukiyaki with a lot of beef slices, sweet and savory broth",
+            "Creamy tomato soup with grilled cheese on the side"
           ]
         };
         if (hunger >= 2) return {
-          emoji:"🥩", title:"Proper Beef & Pork Meal",
-          sub:"Filling • Satisfying • Meaty",
-          note:"Beef or pork, you know what you like, no fish needed.",
+          emoji:"🥩", title:"Substantial beef & pork, properly done",
+          sub:"Filling • Meaty • Satisfying",
+          note:"No fish. Beef or pork. You always know.",
           ideas:[
-            "Beef burger with tomatoes, lettuce & no weird sauce",
-            "Pork ribs with BBQ glaze & coleslaw",
-            "Steak with roasted tomatoes & fries",
-            "Slow-cooked beef with rice, simple and perfect"
+            "Beef burger with fresh tomatoes, lettuce & a proper sauce",
+            "Pork ribs with a light BBQ glaze & crunchy coleslaw",
+            "Steak with roasted potatoes & fleur de sel",
+            "Mustard pork chop with pan sauce"
           ]
         };
         return {
-          emoji:"🥪", title:"Easy Comfort Food",
-          sub:"Classic • Simple • Satisfying",
-          note:"Sometimes simple is exactly right.",
+          emoji:"🥪", title:"Easy, simple & right",
+          sub:"Classic • No Overthink • Satisfying",
+          note:"Sometimes simple is exactly the right call.",
           ideas:[
-            "Beef & tomato sandwich on sourdough",
-            "Pork banh mi, crispy, herby, crunchy",
-            "BLT with extra tomato (yes, extra)",
+            "Beef & tomato sandwich on sourdough with a little mustard",
+            "Pork bánh mì, crispy, herby, crunchy",
+            "Croque-monsieur, with proper béchamel, not the sad microwave version",
             "Beef patty melt with caramelised onions"
           ]
         };
       }
 
+      // Surprise me — savoury
       return {
-        emoji:"🍅", title:"Annie's Wildcard Plate",
-        sub:"Bold • Personal • Totally You",
-        note:"No preference means we pick what you actually love.",
+        emoji:"🍱", title:"A curated mix of your actual favourites",
+        sub:"Bold • Personal • Completely You",
+        note:"No preference? We go straight to what you actually love.",
         ideas:[
-          "Tum mak hoong + nam khao, the dream duo",
-          "Beef pho with extra herbs",
-          "Lasagna leftovers (always better day 2)",
-          "Pork fried rice with tomato & egg, extra crispy"
+          "Tteokguk, Korean rice cake soup with beef broth, surprisingly cosy",
+          "Gyudon, Japanese beef rice bowl with sweet soy & soft egg (nothing else needed)",
+          "Nem nướng cuốn, Vietnamese grilled pork spring rolls, fresh & punchy",
+          "Pork fried rice with tomato & egg, extra crispy at the bottom"
         ]
       };
     }
 
     // ── BOTH SWEET & SAVOURY / NO PREF ─────────────────────────────────────
-    
+
     if (mood === 1) {
       if (temp !== 0) return {
-        emoji:"🍧", title:"Treat Yourself Good",
-        sub:"Sweet • Savoury • Celebration Mode",
-        note:"Happy Annie deserves the best.",
+        emoji:"🍧", title:"Savoury first, sweet finish",
+        sub:"Balanced • Indulgent • Celebration Mode",
+        note:"Happy Annie deserves the full experience.",
         ideas:[
-          "Savory first: Bolognese pasta",
-          "Then: ice cream or Franui frozen raspberry coated in chocolate for dessert",
-          "Starbucks matcha latte to sip on the side (no coffee!)",
-          "A slice of cake if you're feeling celebratory, you deserve it"
+          "Savoury: bolognese pasta or a good bowl of phở",
+          "Sweet finish: ice cream or a chocolate fondant, pick your fighter",
+          "Sip on an iced matcha latte through the whole thing (no coffee!)",
+          "One macaron at the end, just one, the good kind"
         ]
       };
       return {
-        emoji:"🎉", title:"Celebration Meal Combo",
-        sub:"Hearty then Sweet • Full Feast",
-        note:"You're happy, eat what you love, in order.",
+        emoji:"🎉", title:"A proper celebration meal",
+        sub:"Feast Mode • No Rules • Full Joy",
+        note:"You're happy. Eat everything you love, in order.",
         ideas:[
-          "Lasagna as the main, your best dish",
-          "Macaron while you wait for the food to cook",
-          "Starbucks matcha latte to sip on the side (no coffee!)",
-          "And Cheesecake, start to finish"
+          "Main: lasagna, your best dish, made properly",
+          "Side snack while it cooks: a few gimbap rolls or edamame",
+          "Drink: warm matcha latte or a good sparkling water with lemon",
+          "Dessert: strawberry shortcake or a nice cheesecake slice"
         ]
       };
     }
 
     if (mood === 0 || mood === 2) {
       if (temp !== 1) return {
-        emoji:"🛋️", title:"Maximum Comfort Mode",
-        sub:"Warm • Soft • No Stress",
-        note:"You need cozy food and zero decisions. This is it.",
+        emoji:"🛋️", title:"Warm, soft & requires zero decisions",
+        sub:"Cozy • Comfort • No Stress",
+        note:"Cozy food, low decisions. This is the way.",
         ideas:[
-          "Lasagna, warm, rich, effort-free if you order it",
-          "Fluffy pancakes with chocolate sauce, quick to make",
-          "Ramen, broth heals everything",
-          "Warm chocolate fondant with ice cream for after"
+          "Phở, a big bowl, broth heals things",
+          "Onigiri with salmon filling, warm rice, simple and calming",
+          "Warm crêpes with butter & sugar, 10 minutes, done",
+          "Bœuf bourguignon, slow cook it and forget about it"
         ]
       };
       return {
-        emoji:"❄️", title:"Chill & Low-Effort Combo",
-        sub:"Cold • Easy • Calming",
-        note:"Stress calls for cold and easy. You've got this.",
+        emoji:"❄️", title:"Cold, easy & genuinely calming",
+        sub:"Cold • Low Effort • Just Right",
+        note:"Stress = cold food, no cooking, maximum peace.",
         ideas:[
-          "Ice cream, order it, eat it in peace",
-          "Pizza takeaway, no cooking required",
-          "Macaron from the best bakery",
-          "Starbucks cold drink (no coffee) + something small to eat"
+          "Good quality ice cream, order it, eat it in peace",
+          "Gimbap rolls from a Korean takeaway, fresh, no effort",
+          "Chilled soba noodles with a cold dipping broth, surprisingly soothing",
+          "Starbucks cold matcha drink + a small snack alongside (no coffee!)"
         ]
       };
     }
 
     if (hunger <= 1) return {
-      emoji:"🍱", title:"Light Mixed Bites",
-      sub:"Easy • Varied • Low Commitment",
-      note:"Not super hungry, just want a little something good.",
+      emoji:"🍱", title:"Light bites, nothing heavy",
+      sub:"Easy • Varied • Just a Little",
+      note:"Not super hungry, just want something that feels good.",
       ideas:[
-        "Caprese salad with fresh tomatoes, simple & perfect",
-        "Bruschetta with tomatoes & olive oil",
-        "Small bowl of salad",
-        "Starbucks drink + small snack to pair"
+        "Caprese with ripe tomatoes & good mozzarella, can't go wrong",
+        "Edamame with fleur de sel, snack-mode but elevated",
+        "Gỏi cuốn, fresh Vietnamese spring rolls, light & satisfying",
+        "A small matcha latte & one good pastry, that's enough"
       ]
     };
 
     return {
-      emoji:"🍲", title:"Balanced & Satisfying",
-      sub:"Warm • Filling • Classic Annie",
-      note:"A bit of everything, your comfort zone.",
+      emoji:"🍲", title:"Balanced, warm & filling",
+      sub:"Varied • Satisfying • Classic",
+      note:"A bit of everything. Your comfort zone, which is a good zone.",
       ideas:[
-        "Fried rice with eggs and pork, quick, easy, perfect",
-        "Crêpe with ham and cheese + small green salad",
-        "Mango with sticky rice on the side",
-        "Xiao long bao, with extra broth"
+        "Gyudon, Japanese beef rice bowl, soft egg on top, soy-glazed",
+        "Crêpe with ham & comté cheese + small green salad on the side",
+        "Tteokbokki, Korean braised rice cakes. The mild version, not too spicy",
+        "Xiao long bao, extra broth, eat slowly, savour it"
       ]
     };
   }
